@@ -1,0 +1,121 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+} from "chart.js";
+import { Link } from "react-router-dom";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+export default function AirwallexPMMPrototype() {
+  const chartData = {
+    labels: ["EPS (Austria)", "Bancontact (Belgium)", "Giropay (Germany)", "PayNow (SG)"],
+    datasets: [
+      {
+        label: "Failure Rate %",
+        data: [27, 21, 15, 6],
+        backgroundColor: "#6366f1"
+      },
+      {
+        label: "Rescue Conversion %",
+        data: [18, 15, 10, 4],
+        backgroundColor: "#22c55e"
+      }
+    ]
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom"
+      },
+      title: {
+        display: true,
+        text: "Local Payment Failures vs Rescues"
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-8 text-gray-800 space-y-8">
+      <section className="space-y-4">
+        <h1 className="text-4xl font-bold">Fail-Safe Payments: Product Marketing Prototype</h1>
+        <p className="text-lg">A sample GTM walkthrough for a local-payment rescue feature — by [Your Name]</p>
+      </section>
+
+      <Card>
+        <CardContent className="space-y-4 p-6">
+          <h2 className="text-2xl font-semibold">Customer Pain</h2>
+          <p>
+            Cross-border merchants using local methods like EPS or Bancontact face high checkout abandonment due to bank-side authentication failures or user drop-off.
+          </p>
+          <img
+            src="https://lottie.host/93465577-ea1e-41fb-8c1b-3a9461eec9b7/UXFlow-FailureRetry.json"
+            alt="Lottie animation of payment flow"
+            className="w-full max-w-md mx-auto"
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="space-y-4 p-6">
+          <h2 className="text-2xl font-semibold">Positioning & Messaging</h2>
+          <p className="font-medium">"Capture every sale — even when payments fail."</p>
+          <ul className="list-disc list-inside text-sm">
+            <li>Detect local method failures in real-time</li>
+            <li>Trigger rescue flows with alternative options (e.g. retry with card, wallet)</li>
+            <li>Recover up to 60% of failed transactions</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="space-y-4 p-6">
+          <h2 className="text-2xl font-semibold">Launch Strategy</h2>
+          <ul className="list-disc list-inside text-sm">
+            <li>Feature: "Payment Rescue" flow for failed local methods</li>
+            <li>Email campaign: "Reduce your abandoned carts by 60%"</li>
+            <li>In-app CTA for merchants with high EPS/Bancontact failure rates</li>
+            <li>Enablement: battlecards, support training, reporting dashboard</li>
+          </ul>
+          <div className="pt-4">
+            <Link to="/mock-assets">
+              <Button>View Sample Assets ↗</Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="p-6">
+          <h2 className="text-2xl font-semibold mb-4">Analytics Dashboard Sample</h2>
+          <Bar data={chartData} options={chartOptions} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="space-y-4 p-6">
+          <h2 className="text-2xl font-semibold">90-Day Plan</h2>
+          <ul className="list-decimal list-inside text-sm">
+            <li>Week 1-3: Merchant research + internal data deep dive</li>
+            <li>Week 4-6: Positioning, messaging, stakeholder alignment</li>
+            <li>Week 7-9: Launch campaign + pilot with 5 key merchants</li>
+            <li>Week 10-13: Scale globally + iterate with feedback</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      <footer className="pt-12 text-center text-sm text-gray-400">
+        Built by [Your Name] | Product Marketing Manager Prototype | Singapore
+      </footer>
+    </div>
+  );
+}
